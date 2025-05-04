@@ -101,11 +101,15 @@ const About = () => {
                   ))}
                 </div>
               ) : (
-                resumeData?.introduction.map((paragraph, index) => (
-                  <p key={index} className="leading-relaxed mb-4">
-                    {paragraph}
-                  </p>
-                ))
+                resumeData?.introduction && Array.isArray(resumeData.introduction) ? (
+                  resumeData.introduction.map((paragraph, index) => (
+                    <p key={paragraph} className="leading-relaxed mb-4">
+                      {paragraph}
+                    </p>
+                  ))
+                ) : (
+                  <p className="leading-relaxed mb-4">No introduction available.</p>
+                )
               )}
             </div>
             

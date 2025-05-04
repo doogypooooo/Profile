@@ -71,15 +71,19 @@ const Skills = () => {
                 ))}
               </div>
             ) : (
-              <div className="space-y-6">
-                {resumeData?.skills.programming.map((skill) => (
-                  <SkillBar 
-                    key={skill.name} 
-                    skill={skill.name} 
-                    level={skill.level as "basic" | "intermediate" | "advanced"} 
-                    category="programming"
-                  />
-                ))}
+              <div className="space-y-6">                
+                {resumeData?.skills && resumeData.skills.programming && Array.isArray(resumeData.skills.programming) ? (
+                    resumeData.skills.programming.map((skill) => (
+                      <SkillBar 
+                        key={skill.name} 
+                        skill={skill.name} 
+                        level={skill.level as "basic" | "intermediate" | "advanced"} 
+                        category="programming"
+                      />
+                    ))
+                  ) : (
+                    <p>No programming skills available.</p>
+                  )}
               </div>
             )}
           </div>
@@ -103,15 +107,19 @@ const Skills = () => {
                 ))}
               </div>
             ) : (
-              <div className="space-y-6">
-                {resumeData?.skills.server.map((skill) => (
-                  <SkillBar 
-                    key={skill.name} 
-                    skill={skill.name} 
-                    level={skill.level as "basic" | "intermediate" | "advanced"} 
-                    category="server"
-                  />
-                ))}
+              <div className="space-y-6">                
+                {resumeData?.skills && resumeData.skills.server && Array.isArray(resumeData.skills.server) ? (
+                    resumeData.skills.server.map((skill) => (
+                      <SkillBar 
+                        key={skill.name} 
+                        skill={skill.name} 
+                        level={skill.level as "basic" | "intermediate" | "advanced"} 
+                        category="server"
+                      />
+                    ))
+                  ) : (
+                    <p>No server skills available.</p>
+                  )}
               </div>
             )}
           </div>
@@ -135,15 +143,19 @@ const Skills = () => {
                 ))}
               </div>
             ) : (
-              <div className="space-y-6">
-                {resumeData?.skills.game.map((skill) => (
-                  <SkillBar 
-                    key={skill.name} 
-                    skill={skill.name} 
-                    level={skill.level as "basic" | "intermediate" | "advanced"} 
-                    category="game"
-                  />
-                ))}
+              <div className="space-y-6">                
+                {resumeData?.skills && resumeData.skills.game && Array.isArray(resumeData.skills.game) ? (
+                    resumeData.skills.game.map((skill) => (
+                      <SkillBar 
+                        key={skill.name} 
+                        skill={skill.name} 
+                        level={skill.level as "basic" | "intermediate" | "advanced"} 
+                        category="game"
+                      />
+                    ))
+                  ) : (
+                    <p>No game skills available.</p>
+                  )}
               </div>
             )}
           </div>
@@ -167,15 +179,19 @@ const Skills = () => {
                 ))}
               </div>
             ) : (
-              <div className="space-y-6">
-                {resumeData?.skills.mobile.map((skill) => (
-                  <SkillBar 
-                    key={skill.name} 
-                    skill={skill.name} 
-                    level={skill.level as "basic" | "intermediate" | "advanced"} 
-                    category="mobile"
-                  />
-                ))}
+              <div className="space-y-6">                
+                {resumeData?.skills && resumeData.skills.mobile && Array.isArray(resumeData.skills.mobile) ? (
+                    resumeData.skills.mobile.map((skill) => (
+                      <SkillBar 
+                        key={skill.name} 
+                        skill={skill.name} 
+                        level={skill.level as "basic" | "intermediate" | "advanced"} 
+                        category="mobile"
+                      />
+                    ))
+                  ) : (
+                    <p>No mobile skills available.</p>
+                  )}
               </div>
             )}
             
@@ -188,10 +204,14 @@ const Skills = () => {
                   ))}
                 </div>
               ) : (
-                <div className="flex flex-wrap gap-2">
-                  {resumeData?.skills.keywords.map((keyword) => (
-                    <span key={keyword} className="keyword-tag">{keyword}</span>
-                  ))}
+                <div className="flex flex-wrap gap-2">                  
+                  {resumeData?.skills && resumeData.skills.keywords && Array.isArray(resumeData.skills.keywords) ? (
+                      resumeData.skills.keywords.map((keyword) => (
+                        <span key={keyword} className="keyword-tag">{keyword}</span>
+                      ))
+                    ) : (
+                      <p>No keywords available.</p>
+                    )}
                 </div>
               )}
             </div>

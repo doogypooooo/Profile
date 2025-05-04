@@ -1,11 +1,24 @@
 import { db } from "../server/db";
 import {
-  personalInfos, desiredConditions, skills, experiences, educations, projects
+  personalInfos, desiredConditions, skills, experiences, educations, projects, users
 } from "../shared/schema";
 import { resumeData } from "../server/resume-data";
+import { scrypt, randomBytes } from "crypto";
+import { promisify } from "util";
+
+const scryptAsync = promisify(scrypt);
+
+async function hashPassword(password: string) {
+  const salt = randomBytes(16).toString("hex");
+  const buf = (await scryptAsync(password, salt, 64)) as Buffer;
+  return `${buf.toString("hex")}.${salt}`;
+}
+
 
 async function createSampleData() {
-  const adminUserId = 4;
+  let adminUserId;
+  
+  
   try {
     console.log("샘플 데이터 생성 시작...");
 
@@ -85,6 +98,16 @@ async function createSampleData() {
         .then(() => console.log("모바일 스킬 생성 완료"));
     }
 
+    // admin User 생성
+    const hashedPassword = await hashPassword("admin123");
+    const [newUser] = await db.insert(users).values({
+      username: "admin",
+      password: hashedPassword,
+      isAdmin: 1,
+    }).returning();
+    adminUserId = newUser.id;
+    console.log("user 생성 완료", adminUserId)
+
     // 경력 추가
     for (let i = 0; i < resumeData.experience.length; i++) {
       const exp = resumeData.experience[i];
@@ -155,7 +178,8 @@ async function createSampleData() {
     console.error("샘플 데이터 생성 중 오류가 발생했습니다:", error);
   }finally {
       process.exit(0);
-  } 
+  }
 }
 
 // 스크립트 실행
+createSampleData();

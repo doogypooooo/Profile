@@ -28,8 +28,10 @@ const Education = () => {
               </div>
             ))
           ) : (
-            resumeData?.education.map((edu, index) => (
-              <div key={index} className="bg-background p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+            resumeData && resumeData.education && Array.isArray(resumeData.education) ? (
+            resumeData.education.map((edu, index) => (
+              <div 
+                key={index} className="bg-background p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
                 <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 mx-auto">
                   {edu.type === "university" ? (
                     <GraduationCap className="text-primary h-8 w-8" />
@@ -47,7 +49,9 @@ const Education = () => {
                 </p>
               </div>
             ))
-          )}
+            ) : (
+              <p>No education data available.</p>
+            ))}
         </div>
       </div>
     </section>

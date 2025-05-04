@@ -106,8 +106,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const serverSkills = await storage.getSkillsByCategory("server");
       const gameSkills = await storage.getSkillsByCategory("game");
 
-      const mobileSkills = await storage.getSkillsByCategory("mobile");
-      const mobileSkills = await storage.getSkillsByCategory("mobile");
+      const mobileSkills = await storage.getSkillsByCategory("mobile");      
       const keywordList = await storage.getKeywords();
       
       const experienceList = await storage.getExperiences();
@@ -121,19 +120,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // 데이터 변환하여 응답
       const response = {
         personalInfo: personalInfo || {
-          name: personalInfo.name,
-          experience: personalInfo.experience,
-          desiredSalary: personalInfo.desiredSalary,
-          email: personalInfo.email,
-          phone: personalInfo.phone,
-          military: personalInfo.military,
-        },  
-        desiredConditions: !desiredCondition ? {
-          field: desiredCondition.field,
-          employmentType : desiredCondition.employmentType,
-          location : desiredCondition.location
+          name: defaultPersonalInfo.name,
+          experience: defaultPersonalInfo.experience,
+          desiredSalary: defaultPersonalInfo.desiredSalary,
+          email: defaultPersonalInfo.email,
+          phone: defaultPersonalInfo.phone,
+          military: defaultPersonalInfo.military,
+          introduction : defaultPersonalInfo.introduction
         },
-        introduction: personalInfo.introduction,
+        desiredConditions: desiredCondition || {
+          field: defaultDesiredCondition.field,
+          employmentType: defaultDesiredCondition.employmentType,
+          location: defaultDesiredCondition.location,
+        },
+        introduction: personalInfo?.introduction || "",
         skills: {
           programming: programmingSkills,
           server: serverSkills,
@@ -170,8 +170,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(response);
     } catch (error) {
       console.error(error);
-      res.status(500).json(error);
-      res.status(500).json(error);
+      res.status(500).json({ error: error.name, message: error.message });
     }
   });
   
@@ -211,7 +210,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // 교육 관련 API
-  app.get("/api/admin/educations/:id", isAdmin, async (req, res) => {
   app.get("/api/admin/educations", async (req, res) => {
     try {
       const educationList = await storage.getEducations();
@@ -221,9 +219,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: error.name, message: error.message });
     }
   });
-    await handleApiRequestWithId(req, res, (id) => storage.getEducation(id), "교육 목록을 가져오는데 성공했습니다.", "교육 목록을 가져오는데 실패했습니다.");
-      const education = await storage.getEducation(id);
-      res.json(education);
+
+  app.get("/api/admin/educations/:id", isAdmin, async (req, res) => {
+    try {
+      await handleApiRequestWithId(
+        req,
+        res,
+        (id) => storage.getEducation(id),
+        "교육 정보를 가져오는데 성공했습니다.",
+        "교육 정보를 가져오는데 실패했습니다.",
+      );
     } catch (error) {
       console.error("Error fetching education:", error);
       res.status(500).json({ message: "교육 정보를 가져오는데 실패했습니다." });
@@ -243,7 +248,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // 경력 관련 API
-  app.get("/api/admin/experiences/:id", isAdmin, async (req, res) => {
   app.get("/api/admin/experiences", async (req, res) => {
     try {
       const experienceList = await storage.getExperiences();
@@ -253,9 +257,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ error: error.name, message: error.message });
     }
   });
-    await handleApiRequestWithId(req, res, (id) => storage.getExperience(id), "경력 목록을 가져오는데 성공했습니다.", "경력 목록을 가져오는데 실패했습니다.");
-      const experience = await storage.getExperience(id);
-      res.json(experience);
+
+  app.get("/api/admin/experiences/:id", isAdmin, async (req, res) => {
+    try {
+      await handleApiRequestWithId(
+        req,
+        res,
+        (id) => storage.getExperience(id),
+        "경력 정보를 가져오는데 성공했습니다.",
+        "경력 정보를 가져오는데 실패했습니다.",
+      );
     } catch (error) {
       console.error("Error fetching experience:", error);
       res.status(500).json({ message: "경력 정보를 가져오는데 실패했습니다." });

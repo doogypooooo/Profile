@@ -16,9 +16,11 @@ const Experience = () => {
     setShowMore(!showMore);
   };
 
-  const visibleExperiences = !resumeData ? [] : showMore 
-    ? resumeData.experience 
-    : resumeData.experience.slice(0, 5);
+  const visibleExperiences = !resumeData || !resumeData.experience || !Array.isArray(resumeData.experience)
+    ? []
+    : showMore
+      ? resumeData.experience
+      : resumeData.experience.slice(0, 5);
 
   return (
     <section id="experience" className="py-20 bg-card">
@@ -64,40 +66,46 @@ const Experience = () => {
               ))
             ) : (
               <>
-                {visibleExperiences.map((job, index) => (
-                  <div key={index} className="timeline-item">
-                    <div className="timeline-date">
-                      <span className="text-primary font-semibold">{job.period}</span>
-                    </div>
-                    
-                    <div className="timeline-content bg-background p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h3 className="text-xl font-bold">{job.company}</h3>
-                          <p className="text-primary font-medium">{job.position}</p>
+                {visibleExperiences.map((job, index) => {
+                  return job ? (
+                    <div key={index} className="timeline-item">
+                      <div className="timeline-date">
+                        <span className="text-primary font-semibold">{job.period}</span>
+                      </div>
+
+                      <div className="timeline-content bg-background p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <h3 className="text-xl font-bold">{job.company}</h3>
+                            <p className="text-primary font-medium">{job.position}</p>
+                          </div>
+                          <span className="text-foreground bg-primary/20 px-3 py-1 rounded-full text-sm">{job.salary}</span>
                         </div>
-                        <span className="text-foreground bg-primary/20 px-3 py-1 rounded-full text-sm">{job.salary}</span>
-                      </div>
-                      
-                      <div className="mt-4 space-y-3 text-muted-foreground">
-                        {job.project && (
-                          <p><span className="text-primary font-medium">{job.project}</span></p>
-                        )}
-                        {job.achievements.map((achievement, i) => (
-                          <p key={i}><Check className="inline text-primary mr-2 h-4 w-4" /> {achievement}</p>
-                        ))}
-                      </div>
-                      
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {job.technologies.map((tech, i) => (
-                          <span key={i} className="tech-tag">{tech}</span>
-                        ))}
+
+                        <div className="mt-4 space-y-3 text-muted-foreground">
+                          {job.project && (
+                            <p><span className="text-primary font-medium">{job.project}</span></p>
+                          )}
+                          {job.achievements && Array.isArray(job.achievements) ? (
+                            job.achievements.map((achievement) => (
+                              <p key={achievement}><Check className="inline text-primary mr-2 h-4 w-4" /> {achievement}</p>
+                            ))
+                          ) : null}
+                        </div>
+
+                        <div className="mt-4 flex flex-wrap gap-2"> 
+                          {job.technologies && Array.isArray(job.technologies) ? (
+                            job.technologies.map((tech) => (
+                              <span key={tech} className="tech-tag">{tech}</span>
+                            ))
+                          ) : null}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ) : null;
+                })}
                 
-                {resumeData && resumeData.experience.length > 5 && (
+                {resumeData && resumeData.experience && resumeData.experience.length > 5 && (
                   <div className="flex justify-center mt-10 relative z-10">
                     <div className="bg-card p-2 rounded-full">
                       <button onClick={toggleShowMore} className="btn-secondary">

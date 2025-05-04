@@ -46,7 +46,7 @@ app.use((req, res, next) => {
     .select()
     .from(schema.users)
     .where(eq(schema.users.username, "admin"))
-    .get();
+    .execute().then((res) => res[0]);
 
   if (!adminUser) {
     console.log("inserting admin user");
@@ -59,14 +59,55 @@ app.use((req, res, next) => {
       .select()
       .from(schema.users)
       .where(eq(schema.users.username, "admin"))
-      .get();
+      .execute().then((res) => res[0]);
   }
 
+  const sampleData = [
+    {
+      insertTable: schema.personalInfos,
+      data: [
+        { title: 'title', name: 'name', experience: '10', desiredSalary: '5000', email: 'email', phone: 'phone', location: 'location', military: 'military',introduction: 'introduction' }
+      ],
+    },
+    {
+      insertTable: schema.projects,
+      data: [
+        { name: 'project1', company: 'company1', period: '2020-2021', description: 'desc1', technologies: 'tech1', user_id : adminUser?.id, order: 1},
+        { name: 'project2', company: 'company2', period: '2021-2022', description: 'desc2', technologies: 'tech2', user_id: adminUser?.id, order: 2}
+      ],
+    },
+    {
+      insertTable: schema.educations,
+      data: [
+        { institution: "institution1", type: "type1", period: "period1" },
+      ],
+    },
+    {
+      insertTable: schema.experiences,
+      data: [
+        { company: "company1", position: "position1", period: "period1", salary: "salary1" },
+      ],
+    },
+    {
+      insertTable: schema.skills,
+      data: [
+        { name: "skill1", category: "programming" },
+      ],
+    },
+    {
+      insertTable: schema.keywords,
+      data: [
+        { keyword: "keyword1" },
+      ],
+    },
+  ];
+  
   const userUser = await db
-  .select()
-  .from(schema.users)
-  .where(eq(schema.users.username, "user"))
-  .get();
+    .select()
+    .from(schema.users)
+    .where(eq(schema.users.username, "user"))
+    .execute().then((res) => res[0]);
+    
 
   if (!userUser) {
     console.log("inserting user user");
@@ -76,57 +117,17 @@ app.use((req, res, next) => {
       .execute();
   }
 
-  if(adminUser){
-    const sampleData = [
-      {
-        insertTable: schema.personalInfos,
-        data: [
-          { title: 'title', name: 'name', experience: '10', desiredSalary: '5000', email: 'email', phone: 'phone', location: 'location', military: 'military',introduction: 'introduction' }
-        ],
-      },
-      {
-        insertTable: schema.projects,
-        data: [
-          { name: 'project1', company: 'company1', period: '2020-2021', description: 'desc1', technologies: 'tech1', user_id : adminUser.id, order: 1},
-          { name: 'project2', company: 'company2', period: '2021-2022', description: 'desc2', technologies: 'tech2', user_id: adminUser.id, order: 2}
-        ],
-      },
-      {
-        insertTable: schema.educations,
-        data: [
-          { institution: "institution1", type: "type1", period: "period1" },
-        ],
-      },
-      {
-        insertTable: schema.experiences,
-        data: [
-          { company: "company1", position: "position1", period: "period1", salary: "salary1" },
-        ],
-      },
-      {
-        insertTable: schema.skills,
-        data: [
-          { name: "skill1", category: "programming" },
-        ],
-      },
-      {
-        insertTable: schema.keywords,
-        data: [
-          { keyword: "keyword1" },
-        ],
-      },
-    ];
+  if (adminUser) {
     for (const { insertTable, data } of sampleData) {
-        const count = await db.select().from(insertTable).execute();
-        if (count.length === 0) {
-          console.log(`inserting data to ${insertTable._.name} table`);
-          await db.insert(insertTable).values(data).execute();
-        } else {
-          console.log(`${insertTable._.name} table has data`);
-        }
+      const count = await db.select().from(insertTable).execute();
+      if (count.length === 0 && insertTable._) {
+        console.log(`inserting data to ${insertTable._?.name} table`);
+        await db.insert(insertTable).values(data).execute();
+      } else if (insertTable._) {
+        console.log(`${insertTable._?.name} table has data`);
       }
+    }
   }
-
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
