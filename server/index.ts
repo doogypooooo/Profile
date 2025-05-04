@@ -119,10 +119,10 @@ app.use((req, res, next) => {
     for (const { insertTable, data } of sampleData) {
         const count = await db.select().from(insertTable).execute();
         if (count.length === 0) {
-          console.log(`inserting data to ${insertTable.name} table`);
+          console.log(`inserting data to ${insertTable._.name} table`);
           await db.insert(insertTable).values(data).execute();
         } else {
-          console.log(`${insertTable.name} table has data`);
+          console.log(`${insertTable._.name} table has data`);
         }
       }
   }

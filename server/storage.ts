@@ -258,7 +258,7 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getSkillsByCategory(category: string): Promise<Skill[]> {
-    return await db.select().from(skills).where(eq(skills.category, category)).orderBy(desc(skills.id));
+    return await db.select().from(skills).where(eq(skills.category, category)).orderBy(desc(skills.id))
   }
   
   async createSkill(skill: InsertSkill): Promise<Skill> {
