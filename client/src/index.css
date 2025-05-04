@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 172 100% 62%;
+  --primary-foreground: 210 40% 2%;
+  --secondary: 260 60% 67%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+  --sidebar-background: 240 10% 3.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 172 100% 62%;
+  --sidebar-primary-foreground: 210 40% 2%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 240 4.9% 83.9%;
+  --chart-1: 172 100% 62%;
+  --chart-2: 260 60% 67%;
+  --chart-3: 330 70% 60%;
+  --chart-4: 200 80% 60%;
+  --chart-5: 120 90% 60%;
+}
+
+.light {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --primary: 172 100% 35%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 260 60% 67%;
+  --secondary-foreground: 240 10% 3.9%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 10% 3.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 5% 65%;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 240 10% 3.9%;
+  --sidebar-primary: 172 100% 35%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 10% 3.9%;
+  --sidebar-border: 240 5.9% 90%;
+  --sidebar-ring: 240 5% 65%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold text-center relative mb-10 font-sans;
+  }
+  
+  .section-title::after {
+    content: '';
+    @apply absolute h-1 w-20 bg-primary rounded-full left-1/2 -translate-x-1/2 mt-4;
+    bottom: -10px;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-primary-foreground font-medium rounded-md hover:bg-opacity-90 transition duration-300 inline-flex items-center;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-transparent text-primary border border-primary font-medium rounded-md hover:bg-primary/10 transition duration-300 inline-flex items-center;
+  }
+  
+  .nav-item {
+    @apply text-muted-foreground hover:text-primary transition duration-300 font-medium;
+  }
+  
+  .mobile-nav-item {
+    @apply text-muted-foreground hover:text-primary transition duration-300 font-medium py-2 border-b border-muted;
+  }
+  
+  .tech-tag {
+    @apply px-3 py-1 bg-accent rounded-full text-xs font-medium text-primary;
+  }
+  
+  .keyword-tag {
+    @apply px-3 py-1 bg-primary/20 text-primary rounded-full text-xs font-medium;
+  }
+  
+  .form-input {
+    @apply w-full bg-accent border border-muted rounded-md px-4 py-2 text-foreground focus:outline-none focus:border-primary transition duration-300;
+  }
+  
+  .social-link {
+    @apply w-10 h-10 bg-background rounded-full flex items-center justify-center text-muted-foreground hover:text-primary transition duration-300;
+  }
+  
+  .download-link {
+    @apply flex items-center text-foreground hover:text-primary transition duration-300;
+  }
+  
+  .timeline-container {
+    @apply space-y-12;
+  }
+  
+  .timeline-item {
+    @apply relative flex flex-col md:flex-row items-center;
+  }
+  
+  .timeline-date {
+    @apply mb-4 md:mb-0 md:w-1/4 text-center md:text-right md:pr-8;
+  }
+  
+  .timeline-content {
+    @apply w-full md:w-3/4 relative;
+  }
+  
+  .timeline-content:before {
+    @apply hidden md:block absolute top-1/2 -left-4 transform -translate-y-1/2 w-3 h-3 bg-primary rounded-full;
+    content: '';
+  }
+  
+  .project-card {
+    @apply rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1;
+  }
+  
+  .project-card img {
+    @apply transition-transform duration-500;
+  }
+  
+  .project-card:hover img {
+    @apply transform scale-105;
+  }
+}

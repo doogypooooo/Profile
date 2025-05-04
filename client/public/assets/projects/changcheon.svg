@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="changcheon-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a148c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7b1fa2;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="sky-glow" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#e1bee7;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#4a148c;stop-opacity:0" />
+    </radialGradient>
+    <filter id="soft-glow">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <rect width="800" height="400" fill="url(#changcheon-bg)" />
+  
+  <!-- Sky elements -->
+  <circle cx="400" cy="200" r="120" fill="url(#sky-glow)" />
+  
+  <!-- Cloud-like elements representing "heavens" -->
+  <g opacity="0.7">
+    <path d="M150,220 Q250,180 350,220 T550,220" fill="none" stroke="#e1bee7" stroke-width="2" />
+    <path d="M200,250 Q300,210 400,250 T600,250" fill="none" stroke="#e1bee7" stroke-width="1.5" />
+    <path d="M250,280 Q350,240 450,280 T650,280" fill="none" stroke="#e1bee7" stroke-width="1" />
+  </g>
+  
+  <!-- Stylized mountains -->
+  <polygon points="100,300 200,200 300,300" fill="#7e57c2" opacity="0.7" />
+  <polygon points="250,300 350,230 450,300" fill="#7e57c2" opacity="0.8" />
+  <polygon points="400,300 500,180 600,300" fill="#7e57c2" opacity="0.9" />
+  <polygon points="550,300 650,220 750,300" fill="#7e57c2" opacity="0.7" />
+  
+  <!-- Game title -->
+  <text x="400" y="150" font-family="Arial" font-size="60" text-anchor="middle" fill="#ffffff" font-weight="bold" filter="url(#soft-glow)">창천</text>
+  <text x="400" y="210" font-family="Arial" font-size="28" text-anchor="middle" fill="#e1bee7" font-weight="bold">CHANGCHEON</text>
+  <text x="400" y="250" font-family="Arial" font-size="22" text-anchor="middle" fill="#ffffff">MMORPG 게임 - 위메이드</text>
+  <text x="400" y="290" font-family="Arial" font-size="16" text-anchor="middle" fill="#e1bee7" font-style="italic">창공을 나는 천상의 세계</text>
+</svg>

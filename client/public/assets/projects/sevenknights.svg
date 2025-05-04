@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="sevenknights-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6D214F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2C3A47;stop-opacity:1" />
+    </linearGradient>
+    <filter id="flame">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <rect width="800" height="400" fill="url(#sevenknights-bg)" />
+  
+  <!-- Fantasy elements and atmosphere -->
+  <g opacity="0.7">
+    <path d="M0,250 C100,230 200,280 300,250 S500,200 600,250 S800,270 800,250" fill="none" stroke="#B53471" stroke-width="1" />
+    <path d="M0,260 C100,240 200,290 300,260 S500,210 600,260 S800,280 800,260" fill="none" stroke="#B53471" stroke-width="1" />
+    <path d="M0,270 C100,250 200,300 300,270 S500,220 600,270 S800,290 800,270" fill="none" stroke="#B53471" stroke-width="1" />
+  </g>
+  
+  <!-- Seven swords in a circle formation -->
+  <g transform="translate(400, 200)">
+    <g transform="rotate(0)"><line x1="0" y1="0" x2="0" y2="-80" stroke="#FDA7DF" stroke-width="3" /></g>
+    <g transform="rotate(51.4)"><line x1="0" y1="0" x2="0" y2="-80" stroke="#FDA7DF" stroke-width="3" /></g>
+    <g transform="rotate(102.8)"><line x1="0" y1="0" x2="0" y2="-80" stroke="#FDA7DF" stroke-width="3" /></g>
+    <g transform="rotate(154.2)"><line x1="0" y1="0" x2="0" y2="-80" stroke="#FDA7DF" stroke-width="3" /></g>
+    <g transform="rotate(205.6)"><line x1="0" y1="0" x2="0" y2="-80" stroke="#FDA7DF" stroke-width="3" /></g>
+    <g transform="rotate(257)"><line x1="0" y1="0" x2="0" y2="-80" stroke="#FDA7DF" stroke-width="3" /></g>
+    <g transform="rotate(308.4)"><line x1="0" y1="0" x2="0" y2="-80" stroke="#FDA7DF" stroke-width="3" /></g>
+    <circle cx="0" cy="0" r="20" fill="#B53471" />
+  </g>
+  
+  <!-- Game title -->
+  <text x="400" y="140" font-family="Arial" font-size="60" text-anchor="middle" fill="#ffffff" font-weight="bold" filter="url(#flame)">세븐나이츠</text>
+  <text x="400" y="200" font-family="Arial" font-size="28" text-anchor="middle" fill="#FDA7DF" font-weight="bold">SEVEN KNIGHTS</text>
+  <text x="400" y="320" font-family="Arial" font-size="22" text-anchor="middle" fill="#ffffff">모바일 RPG - 넷마블넥서스</text>
+</svg>

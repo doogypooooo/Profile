@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html >
+<head><meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" type="image/x-icon" href="https://chronoodyssey.kakaogames.com/favicon.ico">
+<link rel="apple-touch-icon" href="https://chronoodyssey.kakaogames.com/favicon.png">
+<link rel="modulepreload" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/27da980.js">
+<link rel="modulepreload" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/b03e680.js">
+<link rel="prefetch" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/263e616.js">
+<link rel="prefetch" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/58f33b5.js">
+<link rel="prefetch" as="style" crossorigin href="https://chronoodyssey.kakaogames.com/874fbc2b.css">
+<link rel="prefetch" as="style" crossorigin href="https://chronoodyssey.kakaogames.com/564bfef9.css">
+<link rel="prefetch" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/946aaef.js">
+<link rel="prefetch" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/516636f.js">
+<link rel="prefetch" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/01e751e.js">
+<link rel="prefetch" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/89c1430.js">
+<link rel="prefetch" as="script" crossorigin href="https://chronoodyssey.kakaogames.com/fcf20da.js">
+<link rel="prefetch" as="style" crossorigin href="https://chronoodyssey.kakaogames.com/1761a95f.css">
+<script type="module" src="https://chronoodyssey.kakaogames.com/27da980.js" crossorigin></script>
+<script type="module" src="https://chronoodyssey.kakaogames.com/b03e680.js" crossorigin></script></head>
+<body ><div id="chrono-odyssey"></div><script type="application/json" id="__NUXT_DATA__" data-ssr="false">[{"_errors":1,"serverRendered":2,"data":3,"state":4},{},false,{},{}]</script>
+<script>window.__NUXT__={};window.__NUXT__.config={public:{ENV_MODE:"live",BASE_URL:"https://chronoodyssey.kakaogames.com/",API_NEWS_URL:"https://svc-api.game.daum.net/rss?appId=2873440",API_CONTENTS_DATA:"https://web-contents-api.pcpf.kakaogames.com/contents/chrono",URL_NEWSLETTER_APPLY:"https://subscribe.kakaogames.com/apply/1143213",URL_NEWSLETTER_CANCEL:"https://subscribe.kakaogames.com/cancel/1143213",device:{enabled:true,defaultUserAgent:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36",refreshOnResize:false},i18n:{baseUrl:"",defaultLocale:"en",defaultDirection:"ltr",strategy:"prefix_except_default",lazy:true,rootRedirect:"",routesNameSeparator:"___",defaultLocaleRouteNameSuffix:"default",skipSettingLocaleOnNavigate:false,differentDomains:false,trailingSlash:"append",configLocales:[{code:"en",name:"English",language:"en",files:["/kakaogames/service/kg-deploy-jenkins/home/live/service/workspace/crono-front/service/origin/locales/en/index.json"]},{code:"ko",name:"Korean",language:"ko",files:["/kakaogames/service/kg-deploy-jenkins/home/live/service/workspace/crono-front/service/origin/locales/ko/index.json"]}],locales:{en:{domain:""},ko:{domain:""}},detectBrowserLanguage:false,experimental:{localeDetector:"",switchLocalePathLinkSSR:false,autoImportTranslationFunctions:false},multiDomainLocales:false},gtm:{devtools:true,enabled:false,id:"GTM-WCX9B3L",defer:false,compatibility:false,nonce:"Chrono Odyssey",debug:false,loadScript:true,enableRouterSync:true,trackOnNextTick:false}},app:{baseURL:"/",buildAssetsDir:"/",cdnURL:"https://chronoodyssey.kakaogames.com/"}}</script></body>
+</html>
