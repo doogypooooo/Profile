@@ -88,13 +88,13 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getProjects(): Promise<Project[]> {
-    return await db.select().from(projects).orderBy(projects.order);
+    return await db.select().from(projects).orderBy(desc(projects.id));
   }
   
   async getProjectsByUserId(userId: number): Promise<Project[]> {
     return await db.select().from(projects)
       .where(eq(projects.userId, userId))
-      .orderBy(projects.order);
+      .orderBy(desc(projects.id));
   }
   
   async createProject(project: InsertProject): Promise<Project> {
@@ -122,13 +122,13 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getEducations(): Promise<Education[]> {
-    return await db.select().from(educations).orderBy(educations.order);
+    return await db.select().from(educations).orderBy(desc(educations.id));
   }
   
   async getEducationsByUserId(userId: number): Promise<Education[]> {
     return await db.select().from(educations)
       .where(eq(educations.userId, userId))
-      .orderBy(educations.order);
+      .orderBy(desc(educations.id));
   }
   
   async createEducation(education: InsertEducation): Promise<Education> {
@@ -156,13 +156,13 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getExperiences(): Promise<Experience[]> {
-    return await db.select().from(experiences).orderBy(experiences.order);
+    return await db.select().from(experiences).orderBy(desc(experiences.id));
   }
   
   async getExperiencesByUserId(userId: number): Promise<Experience[]> {
     return await db.select().from(experiences)
       .where(eq(experiences.userId, userId))
-      .orderBy(experiences.order);
+      .orderBy(desc(experiences.id));
   }
   
   async createExperience(experience: InsertExperience): Promise<Experience> {
@@ -190,11 +190,15 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getPersonalInfos(): Promise<PersonalInfo[]> {
-    return await db.select().from(personalInfos);
+    return await db.select().from(personalInfos).orderBy(desc(personalInfos.id));
   }
   
   async getLastPersonalInfo(): Promise<PersonalInfo | undefined> {
-    const [personalInfo] = await db.select().from(personalInfos).orderBy(desc(personalInfos.id)).limit(1);
+    const personalInfoList = await db.select().from(personalInfos).orderBy(desc(personalInfos.id)).limit(1);
+    if(personalInfoList.length === 0) {
+      return undefined;
+    }
+    const [personalInfo] = personalInfoList;
     return personalInfo;
   }
   
@@ -218,11 +222,15 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getDesiredConditions(): Promise<DesiredCondition[]> {
-    return await db.select().from(desiredConditions);
+    return await db.select().from(desiredConditions).orderBy(desc(desiredConditions.id));
   }
   
   async getLastDesiredCondition(): Promise<DesiredCondition | undefined> {
-    const [desiredCondition] = await db.select().from(desiredConditions).orderBy(desc(desiredConditions.id)).limit(1);
+    const desiredConditionList = await db.select().from(desiredConditions).orderBy(desc(desiredConditions.id)).limit(1);
+    if(desiredConditionList.length === 0){
+      return undefined;
+    }
+    const [desiredCondition] = desiredConditionList;
     return desiredCondition;
   }
   
@@ -246,11 +254,11 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getSkills(): Promise<Skill[]> {
-    return await db.select().from(skills);
+    return await db.select().from(skills).orderBy(desc(skills.id));
   }
   
   async getSkillsByCategory(category: string): Promise<Skill[]> {
-    return await db.select().from(skills).where(eq(skills.category, category));
+    return await db.select().from(skills).where(eq(skills.category, category)).orderBy(desc(skills.id));
   }
   
   async createSkill(skill: InsertSkill): Promise<Skill> {
@@ -278,7 +286,7 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getKeywords(): Promise<Keyword[]> {
-    return await db.select().from(keywords);
+    return await db.select().from(keywords).orderBy(desc(keywords.id));
   }
   
   async createKeyword(keyword: InsertKeyword): Promise<Keyword> {

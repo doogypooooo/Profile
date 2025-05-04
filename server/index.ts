@@ -1,7 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
-
+import { setupVite, serveStatic } from "./vite";
+import { eq } from "drizzle-orm";
 import { db } from "./db";
 import * as schema from "../shared/schema";
 
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
         logLine = logLine.slice(0, 79) + "…";
       }
 
-      log(logLine);
+      console.log(logLine);
     }
   });
 
@@ -41,24 +41,90 @@ app.use((req, res, next) => {
 
 (async () => {
   const server = await registerRoutes(app);
-  const sampleData = [
-    {
-      insertTable: schema.users,
-      data: [
-        { username: "admin", password: "password", isAdmin: true },
-        { username: "user", password: "password" },
-      ],
-    },
-  ];
 
-  for (const { insertTable, data } of sampleData) {
-    const count = await db.select().from(insertTable).execute();
-    if (count.length === 0) {
-      log(`inserting data to ${insertTable.name} table`);
-      await db.insert(insertTable).values(data).execute();
-    } else {
-      log(`${insertTable.name} table has data`);
-    }
+  let adminUser = await db
+    .select()
+    .from(schema.users)
+    .where(eq(schema.users.username, "admin"))
+    .get();
+
+  if (!adminUser) {
+    console.log("inserting admin user");
+    await db
+      .insert(schema.users)
+      .values({ username: "admin", password: "password", isAdmin: true })
+      .execute();
+
+    adminUser = await db
+      .select()
+      .from(schema.users)
+      .where(eq(schema.users.username, "admin"))
+      .get();
+  }
+
+  const userUser = await db
+  .select()
+  .from(schema.users)
+  .where(eq(schema.users.username, "user"))
+  .get();
+
+  if (!userUser) {
+    console.log("inserting user user");
+    await db
+      .insert(schema.users)
+      .values({ username: "user", password: "password" })
+      .execute();
+  }
+
+  if(adminUser){
+    const sampleData = [
+      {
+        insertTable: schema.personalInfos,
+        data: [
+          { title: 'title', name: 'name', experience: '10', desiredSalary: '5000', email: 'email', phone: 'phone', location: 'location', military: 'military',introduction: 'introduction' }
+        ],
+      },
+      {
+        insertTable: schema.projects,
+        data: [
+          { name: 'project1', company: 'company1', period: '2020-2021', description: 'desc1', technologies: 'tech1', user_id : adminUser.id, order: 1},
+          { name: 'project2', company: 'company2', period: '2021-2022', description: 'desc2', technologies: 'tech2', user_id: adminUser.id, order: 2}
+        ],
+      },
+      {
+        insertTable: schema.educations,
+        data: [
+          { institution: "institution1", type: "type1", period: "period1" },
+        ],
+      },
+      {
+        insertTable: schema.experiences,
+        data: [
+          { company: "company1", position: "position1", period: "period1", salary: "salary1" },
+        ],
+      },
+      {
+        insertTable: schema.skills,
+        data: [
+          { name: "skill1", category: "programming" },
+        ],
+      },
+      {
+        insertTable: schema.keywords,
+        data: [
+          { keyword: "keyword1" },
+        ],
+      },
+    ];
+    for (const { insertTable, data } of sampleData) {
+        const count = await db.select().from(insertTable).execute();
+        if (count.length === 0) {
+          console.log(`inserting data to ${insertTable.name} table`);
+          await db.insert(insertTable).values(data).execute();
+        } else {
+          console.log(`${insertTable.name} table has data`);
+        }
+      }
   }
 
 
@@ -88,6 +154,6 @@ app.use((req, res, next) => {
     host: "0.0.0.0",
     reusePort: true,
   }, () => {
-    log(`serving on port ${port}`);
+    console.log(`serving on port ${port}`);
   });
 })();
