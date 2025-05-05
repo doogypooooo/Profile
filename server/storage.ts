@@ -39,6 +39,7 @@ export interface IStorage {
   getLastPersonalInfo(): Promise<PersonalInfo | undefined>;
   createPersonalInfo(personalInfo: InsertPersonalInfo): Promise<PersonalInfo>;
   updatePersonalInfo(id: number, personalInfo: Partial<InsertPersonalInfo>): Promise<PersonalInfo | undefined>;
+  deletePersonalInfo(id: number): Promise<boolean>;
   
   // 희망조건 관련 함수
   getDesiredCondition(id: number): Promise<DesiredCondition | undefined>;
@@ -213,6 +214,11 @@ export class DatabaseStorage implements IStorage {
       .where(eq(personalInfos.id, id))
       .returning();
     return updatedPersonalInfo;
+  }
+
+  async deletePersonalInfo(id: number): Promise<boolean> {
+    await db.delete(personalInfos).where(eq(personalInfos.id, id));
+    return true;
   }
   
   // 희망조건 관련 함수 구현

@@ -310,6 +310,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  app.delete("/api/admin/personal-info/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseId(req.params.id, res);
+      const result = await storage.deletePersonalInfo(id);
+      if(!result) {
+        return res.status(500).json({ message: "개인정보 삭제에 실패했습니다." });
+      }
+      res.status(200).json({ message: "개인정보 삭제에 성공했습니다." });
+    } catch (error) {
+      console.error("Error deleting personal info:", error);
+      res.status(500).json({ message: "개인정보 삭제에 실패했습니다." });
+    }
+  });
+
   // 희망조건 관련 API
   app.get("/api/admin/desired-conditions", isAdmin, async (req, res) => {
     await handleApiRequest(

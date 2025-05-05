@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, FileText, Briefcase, Code, GraduationCap, Tag, Settings } from "lucide-react";
 import { getQueryFn } from "@/lib/queryClient";
 import { Skill, Experience, Education, Project, Keyword } from "@shared/schema";
+import { Link as RouterLink } from "wouter";
 
 export default function AdminDashboard() {
   const { data: projects } = useQuery<Project[]>({
@@ -49,13 +50,13 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 이력서에 표시될 개인 정보를 관리합니다.
               </p>
-              <Link href="/admin/personal-info">
+              <RouterLink href="/admin/personal-info">
                 <Button variant="outline" className="w-full justify-between">
                   관리하기
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-              </Link>
-            </CardContent>
+                </RouterLink>
+             </CardContent>
           </Card>
 
           {/* 경력 관리 카드 */}
@@ -68,13 +69,13 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 경력 사항을 관리합니다. 현재 {experiences?.length || 0}개 등록됨.
               </p>
-              <Link href="/admin/experiences">
+              <RouterLink href="/admin/experiences">
                 <Button variant="outline" className="w-full justify-between">
                   관리하기
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-              </Link>
-            </CardContent>
+              </RouterLink>
+             </CardContent>
           </Card>
 
           {/* 교육 관리 카드 */}
@@ -87,13 +88,13 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 교육 이력을 관리합니다. 현재 {educations?.length || 0}개 등록됨.
               </p>
-              <Link href="/admin/educations">
+              <RouterLink href="/admin/educations">
                 <Button variant="outline" className="w-full justify-between">
                   관리하기
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-              </Link>
-            </CardContent>
+              </RouterLink>
+             </CardContent>
           </Card>
 
           {/* 프로젝트 관리 카드 */}
@@ -106,13 +107,13 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 프로젝트 정보를 관리합니다. 현재 {projects?.length || 0}개 등록됨.
               </p>
-              <Link href="/admin/projects">
+              <RouterLink href="/admin/projects">
                 <Button variant="outline" className="w-full justify-between">
                   관리하기
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-              </Link>
-            </CardContent>
+              </RouterLink>
+             </CardContent>
           </Card>
 
           {/* 스킬 관리 카드 */}
@@ -125,13 +126,13 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 기술 스택 및 키워드를 관리합니다. 스킬 {skills?.length || 0}개, 키워드 {keywords?.length || 0}개 등록됨.
               </p>
-              <Link href="/admin/skills">
+              <RouterLink href="/admin/skills">
                 <Button variant="outline" className="w-full justify-between">
                   관리하기
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-              </Link>
-            </CardContent>
+                </RouterLink>
+             </CardContent>
           </Card>
 
           {/* 설정 카드 */}
@@ -144,13 +145,13 @@ export default function AdminDashboard() {
               <p className="text-sm text-muted-foreground mb-4">
                 계정 설정 및 웹사이트 관련 설정을 변경합니다.
               </p>
-              <Link href="/admin/settings">
+              <RouterLink href="/admin/settings">
                 <Button variant="outline" className="w-full justify-between">
                   관리하기
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-              </Link>
-            </CardContent>
+                </RouterLink>
+             </CardContent>
           </Card>
         </div>
       </div>
